@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Crystal Azure Glass Palette */
+  --primary: #3b82f6;      /* Vivid Azure */
+  --primary-glow: rgba(59, 130, 246, 0.4);
+  --secondary: #6366f1;    /* Indigo Accent */
+  
+  --bg-app: #f0f7ff;       /* Crisp Azure White */
+  --bg-shell: #ffffff;
+  
+  --glass-card: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-blur: blur(12px);
+  
+  --text-main: #1e293b;    /* Deep Slate */
+  --text-mute: #64748b;    /* Slate Grey */
+  --text-bright: #3b82f6;
+  
+  --success: #10b981;
+  --error: #ef4444;
+  
+  --card-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.1);
+  --shell-shadow: 0 40px 100px -20px rgba(15, 23, 42, 0.15);
+  
+  --transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dynamic Background Blobs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 50vh;
+  height: 50vh;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.5;
+  animation: blob-float 20s infinite alternate ease-in-out;
+}
+
+body::before {
+  background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+  top: -10%;
+  left: -5%;
+}
+
+body::after {
+  background: radial-gradient(circle, #e0e7ff 0%, transparent 70%);
+  bottom: -10%;
+  right: -5%;
+  animation-delay: -10s;
+}
+
+@keyframes blob-float {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(10%, 10%) scale(1.2); }
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* THE CRYSTAL ATM SHELL */
+.atm-shell {
+  width: 420px;
+  height: 820px;
+  max-height: 96vh;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shell-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Structured Layout - NO OVERLAP */
+.shell-content {
+  flex: 1;
+  width: 100%;
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* GLASS COMPONENTS */
+.glass-panel {
+  background: var(--glass-card);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px -10px rgba(59, 130, 246, 0.15);
+}
+
+/* PREMIUM BUTTONS */
+button {
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  border-radius: 18px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-crystal {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.4);
+}
+
+.btn-crystal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -4px rgba(59, 130, 246, 0.6);
+  filter: brightness(1.05);
+}
+
+/* Keypad Styles - SCALED FOR FIX */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.key {
+  height: 52px; /* Scaled down */
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--glass-border);
+  font-size: 1.15rem;
+  color: var(--text-main);
+  border-radius: 16px;
+}
+
+.key:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Typography */
+.h1 { font-size: 1.8rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+.h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
+.p { color: var(--text-mute); font-size: 0.9rem; line-height: 1.5; }
+.highlight { color: var(--primary); }
+
+/* Utilities */
+.flex-center { display: flex; justify-content: center; align-items: center; }
+
+/* Scrollbar override */
+::-webkit-scrollbar { width: 0; height: 0; }

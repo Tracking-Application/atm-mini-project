@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.env
+.venv
+bin/
+lib/
+include/
+share/
+atm_db.db
+.git/
+.gitignore
+README.md
